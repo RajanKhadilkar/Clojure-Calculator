@@ -6,13 +6,13 @@
   [& args]
   (println "Hello, World!"))
 
-(defn calculator [s1 s2 op]
-  (def n1 (int (s1)))
-  (def n2 (int (s2)))
+(defn calculator [s1 s2 op] 
+  (def n1 (Integer. s1))
+  (def n2 (Integer. s2))
   (case op
     "+" (+ n1 n2)
     "-" (- n1 n2)
-    "/" (/ n1 n2)
+    "/" (float (/ n1 n2))
     "*" (* n1 n2)
     )
   )
@@ -38,16 +38,13 @@
                           (cond (not (re-matches #"^[0-9]*$" n2))
                                 (do (println "Please enter a Number")
                                     (recur))
-                                (and (= op "/") (= n2 0))
+                                (and (= op "/") (= n2 "0"))
                                 (do (println "Please enter a number other than 0")
                                     (recur))
                                 :else
-                                (calculator n1 n2 op))))))))
+                                (println n1 op n2 "=" (calculator n1 n2 op)))))))))
             )
           ) 
   )
-
-
-
 
 (getInput)
